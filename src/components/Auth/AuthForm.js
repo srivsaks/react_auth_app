@@ -46,7 +46,11 @@ const AuthForm = () => {
          }
     })
     .then((data)=>{
-      authContext.login(data.idToken);
+      //data.expiresIn is in string format,by using + we are converting it to integer
+      //data.expiresIn is the seconds from the current time after which our token will expire.
+      //*1000 because we want to convert it to ms
+      const expirationTime=new Date(new Date().getTime()+((+data.expiresIn)*1000)).getTime();
+      authContext.login(data.idToken,expirationTime.toISOString());
       history.replace("/")
       // console.log(data);
     })
