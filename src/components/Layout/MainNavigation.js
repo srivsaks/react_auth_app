@@ -7,6 +7,10 @@ const MainNavigation = () => {
   const authContext=useContext(AuthContext);
   const isLoggedIn=authContext.isLoggedIn;
 
+  const logOut=()=>{
+    authContext.logout();
+  }
+  
   return (
     <header className={classes.header}>
       <Link to='/'>
@@ -21,7 +25,7 @@ const MainNavigation = () => {
             <Link to='/profile'>Profile</Link>
           </li>}
           {isLoggedIn&&<li>
-            <button>Logout</button>
+            <button onClick={logOut}>Logout</button>
           </li>}
           
         </ul>
